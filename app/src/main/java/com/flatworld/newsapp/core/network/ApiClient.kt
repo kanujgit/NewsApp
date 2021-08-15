@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit
 object ApiClient {
     var request: NewsService? = null
         private set
-
     fun init() {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -21,7 +20,7 @@ object ApiClient {
         // setup timeout vale offset
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .addInterceptor(CurlInterceptor(Timber::d)  )
+            .addInterceptor(CurlInterceptor(Timber::d))
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)

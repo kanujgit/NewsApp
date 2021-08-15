@@ -11,7 +11,7 @@ interface NewsService {
      *apiKey  =  2d07a75799694e699c8f676b6841de8b
      * See [article documentation](https://newsapi.org/docs/endpoints/top-headlines).
      */
-    @GET("top-headlines?apiKey=${BuildConfig.BASE_URL}&category=technology")
+    @GET("top-headlines?apiKey=${BuildConfig.NEWS_API_KEY}&category=general")
     suspend fun getTopHeadlines(): Response<NewsResponse>
 
 }

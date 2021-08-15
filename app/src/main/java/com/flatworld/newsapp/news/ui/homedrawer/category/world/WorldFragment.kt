@@ -4,32 +4,71 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.flatworld.newsapp.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import com.flatworld.newsapp.core.extensions.toast
+import com.flatworld.newsapp.databinding.WorldFragmentBinding
+import com.flatworld.newsapp.news.model.NewsArticle
+import com.flatworld.newsapp.news.ui.homedrawer.adapter.NewsArticlesAdapter
+import timber.log.Timber
+
 
 class WorldFragment : Fragment() {
+
+    private var _binding: WorldFragmentBinding? = null
+    private lateinit var adapter: NewsArticlesAdapter
+
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance() = WorldFragment()
     }
 
-    private lateinit var viewModel: WorldViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.world_fragment, container, false)
+    ): View {
+        _binding = WorldFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.takeIf { it.containsKey("ARG_OBJECT") }?.apply {
-            val textView: TextView = view.findViewById(R.id.text)
-            textView.text = getInt("ARG_OBJECT").toString()
-        }
 
+
+        // provide fragment as a ViewStoreOwner
+        val viewModel = ViewModelProvider(this).get(WorldViewModel::class.java)
+
+        // init and set repo class
+        val repo = WorldRepository()
+        viewModel.setRepo(repo)
+
+        // Setting up RecyclerView and adapter
+        binding.newsList.setEmptyView(binding.emptyLayout.emptyView)
+        binding.newsList.setProgressView(binding.progressLayout.progressView)
+
+        adapter = NewsArticlesAdapter(ArrayList()) { toast("item clicked") }
+        binding.newsList.adapter = adapter
+        binding.newsList.layoutManager = GridLayoutManager(activity, 2)
+
+
+        viewModel.fetchWorldHeadlines()
+        viewModel.fetchWorldHeadlines().observe(viewLifecycleOwner, Observer {
+            Timber.d("emitted data : $it ")
+            adapter.setData(it as ArrayList<NewsArticle>)
+        })
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

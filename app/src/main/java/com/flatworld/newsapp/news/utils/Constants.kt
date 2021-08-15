@@ -59,14 +59,14 @@ class  Constants {
         val DEFAULT_NUMBER = 0
 
         /** Constants value for each fragment  */
-        val WORLD = 0
-        val GENERAL = 1
-        val HEALTH = 2
-        val SCIENCE = 3
-        val SPORTS = 4
-        val TECHNOLOGY = 5
-        val BUSINESS = 6
-        val ENTERTAINMENT = 7
+        const val WORLD = 0
+        const val GENERAL = 1
+        const val HEALTH = 2
+        const val SCIENCE = 3
+        const val SPORTS = 4
+        const val TECHNOLOGY = 5
+        const val BUSINESS = 6
+        const val ENTERTAINMENT = 7
 
     }
 
