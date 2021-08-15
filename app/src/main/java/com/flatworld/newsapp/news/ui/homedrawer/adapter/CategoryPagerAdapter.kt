@@ -4,7 +4,7 @@ package com.flatworld.newsapp.news.ui.homedrawer.adapter
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.flatworld.newsapp.R
 import com.flatworld.newsapp.news.ui.homedrawer.category.business.BusinessFragment
 import com.flatworld.newsapp.news.ui.homedrawer.category.entertainment.EntertainmentFragment
@@ -21,7 +21,7 @@ import com.flatworld.newsapp.news.utils.Constants
  */
 
 class CategoryPagerAdapter(fragment: FragmentManager, private val mContext: Context) :
-    FragmentPagerAdapter(fragment) {
+    FragmentStatePagerAdapter(fragment) {
 
     /**
      * Return the [Fragment] that should be displayed for the given page number.
@@ -43,7 +43,7 @@ class CategoryPagerAdapter(fragment: FragmentManager, private val mContext: Cont
      * Return the total number of pages.
      * Currently make static because we don't have api for category
      */
-    override fun getCount(): Int = 8
+    override fun getCount(): Int = 7
 
     /**
      * Return page title of the tap

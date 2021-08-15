@@ -61,6 +61,11 @@ class HomeDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         // Set the pager adapter onto the view pager
         viewPager.adapter = pagerAdapter
 
+        // set off screen limit to 4
+        // for stop multiple time loading during the swiping
+        // later we can change as per requirement
+        viewPager.offscreenPageLimit = 4
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

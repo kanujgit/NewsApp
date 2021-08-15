@@ -13,6 +13,7 @@
         android:theme="@style/Theme.NewsApp">
         <activity
             android:name=".news.ui.homedrawer.HomeDrawerActivity"
+            android:label="@string/menu_home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -19,8 +19,7 @@ class NewsApp : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        // retrofit init
         ApiClient.init()
-
-
     }
 }

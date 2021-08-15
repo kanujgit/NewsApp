@@ -1,14 +1,14 @@
-package com.flatworld.newsapp.news.ui.homedrawer.category.general
+package com.flatworld.newsapp.news.ui.homedrawer.category.viewmodel
 
 import androidx.lifecycle.liveData
 import com.flatworld.newsapp.core.ui.base.BaseViewModel
+import com.flatworld.newsapp.news.repository.CommonRepo
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
-class GeneralViewModel : BaseViewModel<GeneralRepo>() {
+class CommonCategoryViewModel : BaseViewModel<CommonRepo>() {
 
-
-    fun fetchGeneralHeadlines(category: String) = liveData(Dispatchers.IO) {
+    fun fetchTopHeadlines(category: String) = liveData(Dispatchers.IO) {
         try {
             emit("Loading")
             getRepo()?.let {

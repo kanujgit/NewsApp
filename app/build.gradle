@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 
-// Read credentials
+// Read credentials and base url of application
 def credentialFile = rootProject.file("credentials.properties")
 def credentialProperty = new Properties()
 credentialProperty.load(new FileInputStream(credentialFile))
@@ -36,14 +36,12 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
-            resValue "string", "host_url", "https://newsapi.org/v2/"
             buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
-            buildConfigField 'String', 'BASE_URL', '"https://newsapi.org/v2/"'
+            buildConfigField 'String', 'BASE_URL', credentialProperty['API_BASE_URL']
         }
         prod {
-            resValue "string", "host_url", "https://newsapi.org/v2/"
             buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
-            buildConfigField 'String', 'BASE_URL', '"https://newsapi.org/v2/"'
+            buildConfigField 'String', 'BASE_URL', credentialProperty['API_BASE_URL']
         }
 
     }
