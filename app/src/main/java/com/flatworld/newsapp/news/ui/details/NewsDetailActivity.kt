@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.flatworld.newsapp.R
 import com.flatworld.newsapp.databinding.ActivityNewsDetailBinding
@@ -12,6 +13,10 @@ import com.flatworld.newsapp.news.model.NewsArticle
 
 class NewsDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewsDetailBinding
+    lateinit var viewModel: NewsDetailViewModel
+    lateinit var newsArticle: NewsArticle
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewsDetailBinding.inflate(layoutInflater)
@@ -20,8 +25,13 @@ class NewsDetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val newsArticle: NewsArticle = intent.getParcelableExtra<NewsArticle>("data")!!
+        // update ui component
+        newsArticle = intent.getParcelableExtra<NewsArticle>("data")!!
         updateUiComponents(newsArticle)
+
+        // init view model
+        viewModel = ViewModelProvider(this).get(NewsDetailViewModel::class.java)
+
     }
 
     private fun updateUiComponents(newsArticle: NewsArticle) {
@@ -58,6 +68,7 @@ class NewsDetailActivity : AppCompatActivity() {
     }
 
     private fun saveBookMark() {
+        viewModel.insertArticles(newsArticle)
 
     }
 }
