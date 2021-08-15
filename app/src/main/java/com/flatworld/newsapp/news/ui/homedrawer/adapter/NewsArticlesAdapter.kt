@@ -14,7 +14,24 @@ import com.flatworld.newsapp.news.model.NewsArticle
 class NewsArticlesAdapter(
     private var dataset: List<NewsArticle>,
     private val listener: (NewsAdapterEvent) -> Unit
-) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>() {
+) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>(), View.OnClickListener {
+    override fun onClick(v: View?) {
+        if (onItemClickListener != null) {
+            if (v != null) {
+                onItemClickListener!!.onItemClick(v.tag as NewsArticle)
+            }
+
+        }
+    }
+
+    // init click listener
+    private var onItemClickListener: OnItemClickListener? = null
+
+
+    // set click listener
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.onItemClickListener = onItemClickListener
+    }
 
     /**
      * Inflate the view
@@ -25,8 +42,13 @@ class NewsArticlesAdapter(
     /**
      * Bind the view with the data
      */
-    override fun onBindViewHolder(newsHolder: NewsHolder, position: Int) =
-        newsHolder.bind(dataset[position], listener)
+    override fun onBindViewHolder(newsHolder: NewsHolder, position: Int) {
+        newsHolder.bind(dataset[position], listener, position)
+        newsHolder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(dataset[position])
+        }
+    }
+
 
     /**
      * View Holder Pattern
@@ -38,19 +60,19 @@ class NewsArticlesAdapter(
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(newsArticle: NewsArticle, listener: (NewsAdapterEvent) -> Unit) = with(itemView) {
-            binding.newsTitle.text = newsArticle.title
-            binding.newsAuthor.text = newsArticle.author
-            //TODO: need to format date
-            //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
-            binding.newsPublishedAt.text = newsArticle.publishedAt
-            binding.newsImage.load(newsArticle.urlToImage) {
-                placeholder(R.drawable.news_placeholder)
-                error(R.drawable.news_placeholder)
+        fun bind(newsArticle: NewsArticle, listener: (NewsAdapterEvent) -> Unit, position: Int) =
+            with(itemView) {
+                binding.newsTitle.text = newsArticle.title
+                binding.newsAuthor.text = newsArticle.author
+                //TODO: need to format date
+                //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
+                binding.newsPublishedAt.text = newsArticle.publishedAt
+                binding.newsImage.load(newsArticle.urlToImage) {
+                    placeholder(R.drawable.news_placeholder)
+                    error(R.drawable.news_placeholder)
+                }
+                setOnClickListener {}
             }
-
-            setOnClickListener { listener(NewsAdapterEvent.ClickEvent) }
-        }
     }
 
     companion object {
@@ -63,6 +85,7 @@ class NewsArticlesAdapter(
         }
     }
 
+
     // fix 100 data size
     //later implement pagination listener
     override fun getItemCount(): Int {
@@ -74,5 +97,9 @@ class NewsArticlesAdapter(
 
     fun setData(dataset: List<NewsArticle>) {
         this.dataset = dataset
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(viewModel: NewsArticle)
     }
 }

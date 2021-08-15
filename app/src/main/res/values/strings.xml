@@ -6,6 +6,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="back_header">back</string>
     <string name="action_search">Search</string>
 
     <!-- Strings for category name -->
@@ -29,5 +30,8 @@
 
     <!-- Empty -->
     <string name="no_news">No News</string>
+
+    <!--activity label-->
+    <string name="detail">Details</string>
 
 </resources>

@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".news.ui.homedrawer.HomeDrawerActivity">
+    tools:context=".news.ui.details.NewsDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.NewsApp.AppBarOverlay">
@@ -16,20 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.NewsApp.PopupOverlay" />
-
-        <!-- TabLayout that provides a horizontal layout to display tabs -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/sliding_tabs"
-            style="@style/CategoryTab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            app:tabMode="scrollable" />
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:popupTheme="@style/Theme.NewsApp.PopupOverlay"
+            app:title="@string/back_header" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
-        android:id="@+id/content_home"
-        layout="@layout/content_home_drawer" />
+        android:id="@+id/content_detail"
+        layout="@layout/detail_content_view" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

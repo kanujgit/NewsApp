@@ -11,6 +11,6 @@ interface NewsService {
      * Get top headlines
      * See [article documentation](https://newsapi.org/docs/endpoints/top-headlines).
      */
-    @GET("top-headlines?apiKey=${BuildConfig.NEWS_API_KEY}")
+    @GET("top-headlines?language=en&apiKey=${BuildConfig.NEWS_API_KEY}")
     suspend fun getTopHeadlines(@Query("category") category: String): Response<NewsResponse>
 }

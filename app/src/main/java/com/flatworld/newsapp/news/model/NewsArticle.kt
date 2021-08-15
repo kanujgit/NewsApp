@@ -1,9 +1,10 @@
 package com.flatworld.newsapp.news.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import javax.xml.transform.Source
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class NewsArticle(
 
     @SerializedName("source")
@@ -47,13 +48,6 @@ data class NewsArticle(
 
     @SerializedName("content")
     val content: String? = null
-) {
-    data class Source(
+) : Parcelable {
 
-        @SerializedName("id")
-        val id: String? = null,
-
-        @SerializedName("name")
-        val name: String? = null
-    )
 }

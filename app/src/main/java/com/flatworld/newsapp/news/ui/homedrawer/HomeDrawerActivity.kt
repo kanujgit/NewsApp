@@ -64,7 +64,7 @@ class HomeDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         // set off screen limit to 4
         // for stop multiple time loading during the swiping
         // later we can change as per requirement
-        viewPager.offscreenPageLimit = 4
+        //viewPager.offscreenPageLimit = 4
 
     }
 
