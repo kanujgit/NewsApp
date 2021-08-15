@@ -3,6 +3,7 @@ package com.flatworld.newsapp.news.ui.homedrawer
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -10,12 +11,15 @@ import com.flatworld.newsapp.R
 import com.flatworld.newsapp.databinding.ActivityHomeBinding
 import com.flatworld.newsapp.news.ui.homedrawer.adapter.CategoryPagerAdapter
 import com.flatworld.newsapp.news.utils.Constants
+import com.flatworld.newsapp.news.utils.MyProgressDialog
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 
 
 class HomeDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityHomeBinding
+    var mProgressDialog: MyProgressDialog? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,9 +84,32 @@ class HomeDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         val id = item.itemId
         // Switch Fragments in a ViewPager on clicking items in Navigation Drawer
         if (id == R.id.nav_home) {
-            binding.appBarHomeDrawer.contentHome.viewpager.currentItem = Constants.WORLD
+            binding.appBarHomeDrawer.contentHome.viewpager.currentItem = Constants.GENERAL
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    fun showProgressBar() {
+        if (mProgressDialog == null) {
+            mProgressDialog = MyProgressDialog()
+            mProgressDialog!!.myProgressDialog(this)
+
+        }
+        if (!(mProgressDialog!!.isShowing())) {
+            try {
+                mProgressDialog!!.show()
+            } catch (e: WindowManager.BadTokenException) {
+                e.printStackTrace()
+            }
+        }
+        mProgressDialog!!.setCancelable(false)
+    }
+
+    fun hideProgressBar() {
+        mProgressDialog?.dismiss()
+        mProgressDialog = null
+    }
+
+
 }

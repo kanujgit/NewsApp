@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.flatworld.newsapp.BuildConfig
 import com.flatworld.newsapp.R
 import com.flatworld.newsapp.core.extensions.inflate
 import com.flatworld.newsapp.databinding.ItemViewNewsListBinding
 import com.flatworld.newsapp.news.model.NewsAdapterEvent
 import com.flatworld.newsapp.news.model.NewsArticle
 
-class NewsArticlesAdapter(private var dataset: List<NewsArticle>,
-                          private val listener: (NewsAdapterEvent) -> Unit
+class NewsArticlesAdapter(
+    private var dataset: List<NewsArticle>,
+    private val listener: (NewsAdapterEvent) -> Unit
 ) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>() {
 
     /**
@@ -44,7 +44,7 @@ class NewsArticlesAdapter(private var dataset: List<NewsArticle>,
             //TODO: need to format date
             //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
             binding.newsPublishedAt.text = newsArticle.publishedAt
-            binding.newsImage.load(BuildConfig.BASE_URL) {
+            binding.newsImage.load(newsArticle.urlToImage) {
                 placeholder(R.drawable.news_placeholder)
                 error(R.drawable.news_placeholder)
             }
@@ -63,7 +63,14 @@ class NewsArticlesAdapter(private var dataset: List<NewsArticle>,
         }
     }
 
-    override fun getItemCount(): Int = dataset.size
+    // fix 100 data size
+    //later implement pagination listener
+    override fun getItemCount(): Int {
+        return if (dataset.size > 100)
+            100
+        else dataset.size
+        //return dataset.size
+    }
 
     fun setData(dataset: List<NewsArticle>) {
         this.dataset = dataset

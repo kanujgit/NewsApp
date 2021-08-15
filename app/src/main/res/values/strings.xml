@@ -9,7 +9,6 @@
     <string name="action_search">Search</string>
 
     <!-- Strings for category name -->
-    <string name="ic_title_world">World</string>
     <string name="ic_title_general">General</string>
     <string name="ic_title_health">Health</string>
     <string name="ic_title_science">Science</string>

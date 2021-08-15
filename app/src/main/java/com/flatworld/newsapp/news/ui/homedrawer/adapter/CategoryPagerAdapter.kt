@@ -13,7 +13,6 @@ import com.flatworld.newsapp.news.ui.homedrawer.category.health.HealthFragment
 import com.flatworld.newsapp.news.ui.homedrawer.category.science.ScienceFragment
 import com.flatworld.newsapp.news.ui.homedrawer.category.sports.SportsFragment
 import com.flatworld.newsapp.news.ui.homedrawer.category.technology.TechnologyFragment
-import com.flatworld.newsapp.news.ui.homedrawer.category.world.WorldFragment
 import com.flatworld.newsapp.news.utils.Constants
 
 
@@ -29,7 +28,6 @@ class CategoryPagerAdapter(fragment: FragmentManager, private val mContext: Cont
      */
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            Constants.WORLD -> WorldFragment()
             Constants.GENERAL -> GeneralFragment()
             Constants.HEALTH -> HealthFragment()
             Constants.SCIENCE -> ScienceFragment()
@@ -37,7 +35,7 @@ class CategoryPagerAdapter(fragment: FragmentManager, private val mContext: Cont
             Constants.TECHNOLOGY -> TechnologyFragment()
             Constants.BUSINESS -> BusinessFragment()
             Constants.ENTERTAINMENT -> EntertainmentFragment()
-            else -> WorldFragment()
+            else -> GeneralFragment()
         }
     }
 
@@ -52,15 +50,14 @@ class CategoryPagerAdapter(fragment: FragmentManager, private val mContext: Cont
      */
     override fun getPageTitle(position: Int): CharSequence {
         val titleResId: Int = when (position) {
-            Constants.WORLD -> R.string.ic_title_world
-            Constants.GENERAL -> R.string.ic_title_science
+            Constants.GENERAL -> R.string.ic_title_general
             Constants.HEALTH -> R.string.ic_title_health
             Constants.SCIENCE -> R.string.ic_title_science
             Constants.SPORTS -> R.string.ic_title_sports
             Constants.TECHNOLOGY -> R.string.ic_title_technology
             Constants.BUSINESS -> R.string.ic_title_business
             Constants.ENTERTAINMENT -> R.string.ic_title_entertainment
-            else -> R.string.ic_title_world
+            else -> R.string.ic_title_general
         }
         return mContext.getString(titleResId)
     }
