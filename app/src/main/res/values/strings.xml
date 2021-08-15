@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="title_activity_main_drawer">MainDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_search">Search</string>
+
+    <!-- Strings for category name -->
+    <string name="ic_title_world">World</string>
+    <string name="ic_title_general">General</string>
+    <string name="ic_title_health">Health</string>
+    <string name="ic_title_science">Science</string>
+    <string name="ic_title_sports">Sports</string>
+    <string name="ic_title_technology">Technology</string>
+    <string name="ic_title_business">Business</string>
+    <string name="ic_title_entertainment">Entertainment</string>
+
+    <!--Strings for drawer menu-->
+    <string name="menu_home">Home</string>
+    <string name="menu_bookmark">My Bookmarks</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
