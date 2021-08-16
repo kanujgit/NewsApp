@@ -16,7 +16,7 @@ class NewsDetailViewModel : ViewModel() {
 
     private val db by lazy { NewsDatabase(NewsApp.instance).BookmarkDao() }
 
-    fun isArticleSaved(article: NewsArticle) = liveData(Dispatchers.Default) {
+    fun cacheArticle(article: NewsArticle) = liveData(Dispatchers.Default) {
         coroutineScope {
             val isArticleSaved =
                 async {
@@ -35,6 +35,24 @@ class NewsDetailViewModel : ViewModel() {
 
             }
 
+        }
+    }
+
+
+    fun checkCacheItem(article: NewsArticle) = liveData(Dispatchers.Default) {
+        coroutineScope {
+            val isArticleSaved =
+                async {
+                    db.getArticleDetail(
+                        title = article.title!!,
+                        desc = article.description!!
+                    )
+                }
+            if (isArticleSaved.await()) {
+                emit("clear")
+            } else {
+                emit("saved")
+            }
         }
     }
 

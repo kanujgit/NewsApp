@@ -12,6 +12,7 @@ import com.flatworld.newsapp.news.model.NewsAdapterEvent
 import com.flatworld.newsapp.news.model.NewsArticle
 import com.flatworld.newsapp.news.storage.entity.NewsArticleDb
 import com.flatworld.newsapp.news.utils.DateUtil
+import timber.log.Timber
 
 class BookmarkNewsArticlesAdapter(
     private var dataset: List<NewsArticleDb>,
@@ -46,9 +47,14 @@ class BookmarkNewsArticlesAdapter(
      */
     override fun onBindViewHolder(newsHolder: NewsHolder, position: Int) {
         newsHolder.bind(dataset[position], listener, position)
-        newsHolder.itemView.setOnClickListener {
-            onItemClickListener?.onItemClick(dataset[position])
+        try {
+            newsHolder.itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(dataset[position])
+            }
+        } catch (e: Exception) {
+            Timber.d(e)
         }
+
     }
 
 

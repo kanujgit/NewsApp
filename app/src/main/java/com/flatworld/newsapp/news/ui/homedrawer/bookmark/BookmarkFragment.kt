@@ -49,6 +49,17 @@ class BookmarkFragment : Fragment(), BookmarkNewsArticlesAdapter.OnItemClickList
         binding.newsList.adapter = adapter
         binding.newsList.layoutManager = GridLayoutManager(activity, 2)
         adapter.setOnItemClickListener(this)
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.d("start")
         viewModel.getAllBookMarks()
             .observe(viewLifecycleOwner, {
                 Timber.d("emitted data : $it ")
@@ -70,11 +81,6 @@ class BookmarkFragment : Fragment(), BookmarkNewsArticlesAdapter.OnItemClickList
             })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     // make compatible to newsArticleDatabase class
     private fun NewsArticleDb.toNewsArticle() = NewsArticle(
         source = NewsArticle.Source(id = source.id, name = source.name),
@@ -87,8 +93,8 @@ class BookmarkFragment : Fragment(), BookmarkNewsArticlesAdapter.OnItemClickList
         content = content,
     )
 
-    override fun onItemClick(dbArticle: NewsArticleDb) {
-        viewModel.selectItem(item = dbArticle.toNewsArticle())
+    override fun onItemClick(item: NewsArticleDb) {
+        viewModel.selectItem(item = item.toNewsArticle())
     }
 
 
