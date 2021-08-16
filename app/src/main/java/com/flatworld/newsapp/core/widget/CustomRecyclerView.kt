@@ -82,7 +82,7 @@ class CustomRecyclerView @JvmOverloads constructor(
 
     fun setProgressView(progressView: View) {
         this.progressView = progressView
-        this.progressView?.visible()
+        this.progressView?.gone()
     }
 
     fun setEmptyMessage(@StringRes mEmptyMessageResId: Int) {

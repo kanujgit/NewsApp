@@ -17,17 +17,27 @@ interface BookmarkDao {
     @Insert
     suspend fun insertArticles(articles: NewsArticleDb): Long
 
+    /**
+     *  return as true is entry is exist
+     */
     @Query("SELECT EXISTS (SELECT 1 FROM news_article WHERE title = :title and description=:desc)")
     suspend fun getArticleDetail(title: String, desc: String): Boolean
 
+    /**
+     * clear news article entry if exist
+     */
     @Query("DELETE FROM news_article WHERE title = :title and description=:desc")
     suspend fun clearArticle(title: String, desc: String)
 
+    /**
+     *clear news articles entries
+     */
     @Query("DELETE FROM news_article")
     fun clearAllArticles()
 
+
     @Transaction
-    fun clearAndCacheArticles(articles: List<NewsArticleDb>) {
+    suspend fun clearAndCacheArticles(articles: List<NewsArticleDb>) {
         clearAllArticles()
     }
 

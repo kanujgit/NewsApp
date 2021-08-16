@@ -14,5 +14,5 @@
     <color name="color_tab_text">#717171</color>
     <!-- Other colors -->
     <color name="color_transparent">#33000000</color>
-    <color name="color_sub_title">#6B6B6B</color>
+    <color name="color_sub_title">#FFFFFF</color>
 </resources>

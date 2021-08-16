@@ -20,7 +20,6 @@
         <activity
             android:name=".news.ui.homedrawer.HomeDrawerActivity"
             android:exported="true"
-            android:label="@string/menu_home"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

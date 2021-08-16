@@ -11,6 +11,7 @@ import coil.load
 import com.flatworld.newsapp.R
 import com.flatworld.newsapp.databinding.ActivityNewsDetailBinding
 import com.flatworld.newsapp.news.model.NewsArticle
+import com.flatworld.newsapp.news.utils.DateUtil
 
 class NewsDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewsDetailBinding
@@ -28,7 +29,7 @@ class NewsDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // update ui component
-        newsArticle = intent.getParcelableExtra<NewsArticle>("data")!!
+        newsArticle = intent.getParcelableExtra("data")!!
         updateUiComponents(newsArticle)
 
         // init view model
@@ -45,8 +46,10 @@ class NewsDetailActivity : AppCompatActivity() {
         binding.contentDetail.tvTitleText.text = newsArticle.title
         binding.contentDetail.tvSubTitle.text = newsArticle.description
 
-        //TODO need to change data format
-        binding.contentDetail.tvUpdateDate.text = newsArticle.publishedAt
+        binding.contentDetail.tvUpdateDate.text =
+            DateUtil.getTimeDifference(DateUtil.formatDate(newsArticle.publishedAt))
+        saveAndUpdateBookMark()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

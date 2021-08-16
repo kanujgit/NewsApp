@@ -16,25 +16,6 @@ class NewsDetailViewModel : ViewModel() {
 
     private val db by lazy { NewsDatabase(NewsApp.instance).BookmarkDao() }
 
-//    fun insertArticles(article: NewsArticle) = liveData(Dispatchers.Default) {
-//
-//        coroutineScope {
-//            val isArticleSaved: Deferred<Boolean> =
-//                async { db.getArticleDetail(title = article.title!!, desc = article.description!!) }
-//
-//            if (isArticleSaved.await()) {
-//                db.clearArticle(title = article.title!!, desc = article.description!!)
-//            }
-//
-//            val value =
-//                async { db.insertArticles(articles = article.toNewsArticleDb()) }
-//            value.await()
-//        }
-//        articleSave.postValue(value)
-//        emit(articleSave)
-//    }
-
-
     fun isArticleSaved(article: NewsArticle) = liveData(Dispatchers.Default) {
         coroutineScope {
             val isArticleSaved =

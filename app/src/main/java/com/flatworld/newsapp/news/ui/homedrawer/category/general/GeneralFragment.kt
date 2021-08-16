@@ -1,19 +1,17 @@
 package com.flatworld.newsapp.news.ui.homedrawer.category.general
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flatworld.newsapp.R
 import com.flatworld.newsapp.databinding.CommonCategoryViewBinding
 import com.flatworld.newsapp.news.model.NewsArticle
 import com.flatworld.newsapp.news.repository.CommonRepo
-import com.flatworld.newsapp.news.ui.details.NewsDetailActivity
 import com.flatworld.newsapp.news.ui.homedrawer.HomeDrawerActivity
 import com.flatworld.newsapp.news.ui.homedrawer.adapter.NewsArticlesAdapter
 import com.flatworld.newsapp.news.ui.homedrawer.category.viewmodel.CommonCategoryViewModel
@@ -24,7 +22,7 @@ class GeneralFragment : Fragment(), NewsArticlesAdapter.OnItemClickListener {
 
     private var _binding: CommonCategoryViewBinding? = null
     private lateinit var adapter: NewsArticlesAdapter
-    private lateinit var viewModel: CommonCategoryViewModel
+    private val viewModel: CommonCategoryViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -40,7 +38,7 @@ class GeneralFragment : Fragment(), NewsArticlesAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CommonCategoryViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(CommonCategoryViewModel::class.java)
 
         // init and set repo class
         val repo = CommonRepo()
@@ -57,7 +55,7 @@ class GeneralFragment : Fragment(), NewsArticlesAdapter.OnItemClickListener {
         binding.newsList.layoutManager = GridLayoutManager(activity, 2)
 
         adapter.setOnItemClickListener(this@GeneralFragment)
-        viewModel.fetchTopHeadlines(getString(R.string.ic_title_general))
+        // viewModel.fetchTopHeadlines(getString(R.string.ic_title_general))
         viewModel.fetchTopHeadlines(getString(R.string.ic_title_general))
             .observe(viewLifecycleOwner, Observer {
                 Timber.d("emitted data : $it ")
@@ -84,11 +82,9 @@ class GeneralFragment : Fragment(), NewsArticlesAdapter.OnItemClickListener {
         _binding = null
     }
 
-    override fun onItemClick(newsArticle: NewsArticle) {
-        val intent = Intent(activity, NewsDetailActivity::class.java)
-        intent.putExtra("data", newsArticle)
-        activity?.startActivity(intent)
-
-
+    // Called when the item is clicked
+    override fun onItemClick(item: NewsArticle) {
+        // Set a new item
+        viewModel.selectItem(item = item)
     }
 }

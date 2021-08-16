@@ -1,4 +1,4 @@
-package com.flatworld.newsapp.news.ui.homedrawer.adapter
+package com.flatworld.newsapp.news.ui.homedrawer.bookmark
 
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +10,17 @@ import com.flatworld.newsapp.core.extensions.inflate
 import com.flatworld.newsapp.databinding.ItemViewNewsListBinding
 import com.flatworld.newsapp.news.model.NewsAdapterEvent
 import com.flatworld.newsapp.news.model.NewsArticle
+import com.flatworld.newsapp.news.storage.entity.NewsArticleDb
 import com.flatworld.newsapp.news.utils.DateUtil
 
-class NewsArticlesAdapter(
-    private var dataset: List<NewsArticle>,
+class BookmarkNewsArticlesAdapter(
+    private var dataset: List<NewsArticleDb>,
     private val listener: (NewsAdapterEvent) -> Unit
-) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>(), View.OnClickListener {
+) : RecyclerView.Adapter<BookmarkNewsArticlesAdapter.NewsHolder>(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (onItemClickListener != null) {
             if (v != null) {
-                onItemClickListener!!.onItemClick(v.tag as NewsArticle)
+                onItemClickListener!!.onItemClick(v.tag as NewsArticleDb)
             }
 
         }
@@ -61,11 +62,10 @@ class NewsArticlesAdapter(
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(newsArticle: NewsArticle, listener: (NewsAdapterEvent) -> Unit, position: Int) =
+        fun bind(newsArticle: NewsArticleDb, listener: (NewsAdapterEvent) -> Unit, position: Int) =
             with(itemView) {
                 binding.newsTitle.text = newsArticle.title
                 binding.newsAuthor.text = newsArticle.author
-                //TODO: need to format date
                 binding.newsPublishedAt.text =
                     DateUtil.getTimeDifference(DateUtil.formatDate(newsArticle.publishedAt))
                 binding.newsImage.load(newsArticle.urlToImage) {
@@ -96,11 +96,11 @@ class NewsArticlesAdapter(
         //return dataset.size
     }
 
-    fun setData(dataset: List<NewsArticle>) {
+    fun setData(dataset: List<NewsArticleDb>) {
         this.dataset = dataset
     }
 
     interface OnItemClickListener {
-        fun onItemClick(item: NewsArticle)
+        fun onItemClick(viewModel: NewsArticleDb)
     }
 }

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flatworld.newsapp.R
 import com.flatworld.newsapp.core.extensions.toast
@@ -18,11 +18,11 @@ import com.flatworld.newsapp.news.ui.homedrawer.adapter.NewsArticlesAdapter
 import com.flatworld.newsapp.news.ui.homedrawer.category.viewmodel.CommonCategoryViewModel
 import timber.log.Timber
 
-class SportsFragment : Fragment() {
+class SportsFragment : Fragment(), NewsArticlesAdapter.OnItemClickListener {
 
     private var _binding: CommonCategoryViewBinding? = null
     private lateinit var adapter: NewsArticlesAdapter
-    private lateinit var viewModel: CommonCategoryViewModel
+    private val viewModel: CommonCategoryViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,7 +43,7 @@ class SportsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CommonCategoryViewModel::class.java)
+//        viewModel = ViewModelProvider(this).get(CommonCategoryViewModel::class.java)
 
         // init and set repo class
         val repo = CommonRepo()
@@ -57,7 +57,7 @@ class SportsFragment : Fragment() {
         binding.newsList.adapter = adapter
         binding.newsList.layoutManager = GridLayoutManager(activity, 2)
 
-
+        adapter.setOnItemClickListener(this@SportsFragment)
         viewModel.fetchTopHeadlines(getString(R.string.ic_title_sports))
         viewModel.fetchTopHeadlines(getString(R.string.ic_title_sports))
             .observe(viewLifecycleOwner, Observer {
@@ -83,6 +83,10 @@ class SportsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(item: NewsArticle) {
+        viewModel.selectItem(item)
     }
 
 }

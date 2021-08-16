@@ -23,13 +23,14 @@
             android:id="@+id/sliding_tabs"
             style="@style/CategoryTab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
             app:tabMode="scrollable" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
         android:id="@+id/content_home"
         layout="@layout/content_home_drawer" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
