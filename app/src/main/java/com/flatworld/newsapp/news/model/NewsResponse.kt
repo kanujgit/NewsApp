@@ -10,5 +10,11 @@ data class NewsResponse(
     val totalResults: Int = 0,
 
     @SerializedName("articles")
-    val articles: List<NewsArticle> = emptyList()
+    val articles: List<NewsArticle> = emptyList(),
+
+    @SerializedName("code")
+    val code: String = "",
+
+    @SerializedName("message")
+    val message: String = ""
 )

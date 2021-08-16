@@ -18,8 +18,9 @@ class CommonCategoryViewModel : BaseViewModel<CommonRepo>() {
         try {
             emit("Loading")
             getRepo()?.let {
-                if (it.getFreshNewsFromWebService(category).isSuccessful) {
-                    it.getFreshNewsFromWebService(category).body()?.let { it1 ->
+                val item = it.getFreshNewsFromWebService(category)
+                if (item.isSuccessful) {
+                    item.body()?.let { it1 ->
                         emit(it1.articles)
                     }
                 } else {
