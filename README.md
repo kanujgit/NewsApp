@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/kanujgit/NewsApp/tree/main.svg?style=svg)](https://circleci.com/gh/kanujgit/NewsApp/tree/main)
 # News App
 
 News App is a simple news app which uses [NewsAPI](https://newsapi.org/) to fetch top news headlines from the API. 
