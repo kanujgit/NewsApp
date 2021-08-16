@@ -7,6 +7,18 @@ News App is a simple news app which uses [NewsAPI](https://newsapi.org/) to fetc
 The goal is to create a News Feed app which gives a user regularly-updated news from the internet 
 related to a particular topic, person, or location. 
 
+
+## API key
+You'll need to provide API key to fetch the news from the News Service (API). Currently the news is fetched from [NewsAPI](https://newsapi.org/)
+
+- Generate an API key (It's only 2 steps!) from [NewsAPI](https://newsapi.org/)
+- Create new file named -> `credentials.properties` in our project root folder
+- Add the API key as shown below [Make sure to keep the double quotes]:
+```
+    NEWS_API_KEY = "<INSERT_YOUR_API_KEY>"
+```
+
+
 The codebase focuses 👓 on following key things:
 - Code structuring, style and comments
 - Offline
