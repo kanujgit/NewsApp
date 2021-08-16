@@ -21,6 +21,7 @@ You'll need to provide API key to fetch the news from the News Service (API). Cu
 - Add the API key as shown below [Make sure to keep the double quotes]:
 ```
     NEWS_API_KEY = "<INSERT_YOUR_API_KEY>"
+    API_BASE_URL = "<INSERT_YOUR_BASE_URL>"
 ```
 
 
