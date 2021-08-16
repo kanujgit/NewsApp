@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.flatworld.newsapp.R
@@ -15,6 +16,7 @@ class NewsDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewsDetailBinding
     lateinit var viewModel: NewsDetailViewModel
     lateinit var newsArticle: NewsArticle
+    lateinit var item: MenuItem
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,7 @@ class NewsDetailActivity : AppCompatActivity() {
 
         // init view model
         viewModel = ViewModelProvider(this).get(NewsDetailViewModel::class.java)
+
 
     }
 
@@ -53,10 +56,10 @@ class NewsDetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        this.item = item
         return when (item.itemId) {
             R.id.action_bookmark -> {
-                item.icon = ContextCompat.getDrawable(this, R.drawable.ic_fill_star)
-                saveBookMark()
+                saveAndUpdateBookMark()
                 true
             }
             android.R.id.home -> {
@@ -67,8 +70,18 @@ class NewsDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveBookMark() {
-        viewModel.insertArticles(newsArticle)
+    private fun saveAndUpdateBookMark() {
+        if (this::item.isInitialized) {
+            viewModel.isArticleSaved(newsArticle).observe(this, Observer {
+                if (it != null) {
+                    if (it.equals("saved")) {
+                        item.icon = ContextCompat.getDrawable(this, R.drawable.ic_fill_star)
+                    } else if (it.equals("clear")) {
+                        item.icon = ContextCompat.getDrawable(this, R.drawable.ic_star)
+                    }
+                }
+            })
+        }
 
     }
 }

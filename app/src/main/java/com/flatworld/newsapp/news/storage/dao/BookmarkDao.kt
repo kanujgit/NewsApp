@@ -15,7 +15,13 @@ interface BookmarkDao {
      * Insert articles into the table
      */
     @Insert
-    fun insertArticles(articles: List<NewsArticleDb>): List<Long>
+    suspend fun insertArticles(articles: NewsArticleDb): Long
+
+    @Query("SELECT EXISTS (SELECT 1 FROM news_article WHERE title = :title and description=:desc)")
+    suspend fun getArticleDetail(title: String, desc: String): Boolean
+
+    @Query("DELETE FROM news_article WHERE title = :title and description=:desc")
+    suspend fun clearArticle(title: String, desc: String)
 
     @Query("DELETE FROM news_article")
     fun clearAllArticles()
@@ -23,7 +29,6 @@ interface BookmarkDao {
     @Transaction
     fun clearAndCacheArticles(articles: List<NewsArticleDb>) {
         clearAllArticles()
-        insertArticles(articles)
     }
 
     /**

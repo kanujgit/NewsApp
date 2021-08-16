@@ -49,5 +49,13 @@ data class NewsArticle(
     @SerializedName("content")
     val content: String? = null
 ) : Parcelable {
+    @Parcelize
+    data class Source(
 
+        @SerializedName("id")
+        var id: String? = null,
+
+        @SerializedName("name")
+        var name: String? = null
+    ) : Parcelable
 }

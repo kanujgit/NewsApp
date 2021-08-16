@@ -16,57 +16,57 @@ data class NewsArticleDb(
      * Primary key for Room.
      */
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    var id: Int = 0,
 
     /**
      * Name of the author for the article
      */
     @ColumnInfo(name = NewsArticles.Column.author)
-    val author: String? = null,
+    var author: String? = null,
 
     /**
      * Title of the article
      */
     @ColumnInfo(name = NewsArticles.Column.title)
-    val title: String? = null,
+    var title: String? = null,
 
     /**
      * Complete description of the article
      */
     @ColumnInfo(name = NewsArticles.Column.description)
-    val description: String? = null,
+    var description: String? = null,
 
     /**
      * URL to the article
      */
     @ColumnInfo(name = NewsArticles.Column.url)
-    val url: String? = null,
+    var url: String? = null,
 
     /**
      * URL of the artwork shown with article
      */
     @ColumnInfo(name = NewsArticles.Column.urlToImage)
-    val urlToImage: String? = null,
+    var urlToImage: String? = null,
 
     /**
      * Date-time when the article was published
      */
     @ColumnInfo(name = NewsArticles.Column.publishedAt)
-    val publishedAt: String? = null,
+    var publishedAt: String? = null,
 
     @Embedded(prefix = "source_")
-    val source: Source,
+    var source: Source,
 
     @ColumnInfo(name = NewsArticles.Column.content)
-    val content: String? = null
+    var content: String? = null
 ) {
 
     data class Source(
         @ColumnInfo(name = NewsArticles.Column.sourceId)
-        val id: String? = null,
+        var id: String? = null,
 
         @ColumnInfo(name = NewsArticles.Column.sourceName)
-        val name: String? = null
+        var name: String? = null
     )
 
     object NewsArticles {
