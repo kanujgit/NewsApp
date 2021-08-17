@@ -1,6 +1,7 @@
 package com.flatworld.newsapp.news.ui.details
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -51,15 +52,15 @@ class NewsDetailActivity : AppCompatActivity() {
         binding.contentDetail.tvUpdateDate.text =
             DateUtil.getTimeDifference(DateUtil.formatDate(newsArticle.publishedAt))
 
-        // init bookmark icon
-        checkCacheItem()
-
-
+        // add 200 ms delay, menu item takes time to load
+        Handler(mainLooper).postDelayed({
+            checkCacheItem()
+        }, 200)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(com.flatworld.newsapp.R.menu.detail_view_menu, menu)
+        menuInflater.inflate(R.menu.detail_view_menu, menu)
         this.menu = menu
         return true
     }

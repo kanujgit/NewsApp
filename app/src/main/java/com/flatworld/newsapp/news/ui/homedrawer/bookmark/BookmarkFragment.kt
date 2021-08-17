@@ -72,6 +72,7 @@ class BookmarkFragment : Fragment(), BookmarkNewsArticlesAdapter.OnItemClickList
                     (activity as HomeDrawerActivity?)?.hideProgressBar()
 
                 } else {
+                    binding.newsList.adapter = adapter
                     adapter.setData(it as ArrayList<NewsArticleDb>)
                     binding.newsList.visibility = View.VISIBLE
                     binding.emptyLayout.emptyView.visibility = View.GONE

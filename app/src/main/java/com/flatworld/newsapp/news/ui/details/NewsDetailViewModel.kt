@@ -49,9 +49,9 @@ class NewsDetailViewModel : ViewModel() {
                     )
                 }
             if (isArticleSaved.await()) {
-                emit("clear")
-            } else {
                 emit("saved")
+            } else {
+                emit("clear")
             }
         }
     }
