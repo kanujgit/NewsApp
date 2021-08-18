@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/kanujgit/NewsApp/tree/main.svg?style=svg)](https://circleci.com/gh/kanujgit/NewsApp/tree/main) 
 [![codebeat badge](https://codebeat.co/badges/2876f2a1-ab51-40c4-8685-e82790811257)](https://codebeat.co/projects/github-com-kanujgit-newsapp-main)
-# News App.  
+# News App  
 
 News App is a simple news app which uses [NewsAPI](https://newsapi.org/) to fetch top news headlines from the API. 
 
@@ -13,6 +13,9 @@ The codebase focuses on following key things:
 - Code structuring, style and comments
 - Offline
 - Kotlin + Coroutines
+- room database
+- coroutine flow
+- Retrofit
 
 
 ## API key
@@ -39,6 +42,7 @@ You'll need to provide API key to fetch the news from the News Service (API). Cu
 * CardView
 * RecyclerView
 * Coroutine
+* Room database
 
 
 ## Architecture
