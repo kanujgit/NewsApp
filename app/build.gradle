@@ -41,11 +41,11 @@ android {
     productFlavors {
         dev {
             buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
-            buildConfigField 'String', 'BASE_URL', credentialProperty['API_BASE_URL']
+            buildConfigField 'String', 'API_BASE_DEV_URL', credentialProperty['API_BASE_DEV_URL']
         }
         prod {
             buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
-            buildConfigField 'String', 'BASE_URL', credentialProperty['API_BASE_URL']
+            buildConfigField 'String', 'API_BASE_PRD_URL', credentialProperty['API_BASE_PRD_URL']
         }
 
     }
